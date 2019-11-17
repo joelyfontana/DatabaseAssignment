@@ -4,6 +4,9 @@ Data Structures
 Section 1
 Assignment 5 - Building a Database with BST*/
 
+#pragma once
+using namespace std;
+
 template <class T, class V>
 //make the node class
 class TreeNode
@@ -26,6 +29,7 @@ TreeNode<T,V>::TreeNode()
 {
 	//make sure the values are all empty
 	key = NULL;
+	value = NULL;
 	left = NULL;
 	right = NULL;
 }
@@ -34,7 +38,8 @@ template <class T, class V>//overloaded constructor
 TreeNode<T,V>::TreeNode(T k, V value)
 {
 	//make sure the values are all empty
-	key = NULL;
+	this->key = k;
+	this->value = value;
 	left = NULL;
 	right = NULL;
 }

@@ -4,11 +4,11 @@ Data Structures
 Section 1
 Assignment 5 - Building a Database with BST*/
 
+#pragma once
 #include <iostream>
 #include "TreeNode.h"
+#include <fstream>
 using namespace std;
-
-//tree of intergers!!!
 
 //convert to a template
 //BUILD THE TREE
@@ -17,9 +17,11 @@ template <class T, class V>
 class BST
 {
 private:
-	TreeNode<T,V>* root; //pointer to the root!!!
+	
+	void serializationNode(TreeNode<T, V>* node, ofstream& file);
 
 public:
+	TreeNode<T, V>* root; //pointer to the root!!!
 	//constructor and destructor
 	BST();
 	~BST();
@@ -36,6 +38,9 @@ public:
 	TreeNode<T, V>* getMax();
 	TreeNode<T, V>* getSuccessor(TreeNode<T,V>* d);
 	void printTree();
+	TreeNode<T,V>* peek();
+	void serialization(string newFileName);
+	
 	// a recursive function that allows subtree to print not just the whole tree
 	void recPrint(TreeNode<T,V>* node);
 };
@@ -64,6 +69,17 @@ bool BST<T,V>::isEmpty()
 	}
 }
 
+template <class T, class V>
+TreeNode<T,V>* BST<T, V>::peek()
+{
+	if (root==NULL)
+	{
+		throw runtime_error("tree is empty - cannot peek");
+	}
+	//cout << "not empty" << endl;
+	return root;
+}
+
 //allows to print only the subtrees
 template <class T, class V>
 void BST<T,V>::recPrint(TreeNode<T,V>* node)
@@ -83,6 +99,42 @@ template <class T, class V>
 void BST<T,V>::printTree()
 {
 	recPrint(root);
+}
+
+//traverses the tree inorder to write to it
+template <class T, class V>
+void BST<T, V>::serialization(string newFileName)
+{
+	ofstream file;
+	//cout << "after file" <<endl;
+	file.open(newFileName);
+	//cout << "after open file" << endl;
+	serializationNode(root, file);
+	cout << "file: " << newFileName << endl;
+	//cout << "after serialization" << endl;
+	file.close();
+	cout << "File is closed" << endl;
+}
+
+template <class T, class V>
+void BST<T, V>::serializationNode(TreeNode<T,V>* node, ofstream& file)
+{
+	//check to see if the node is null
+	if (node == NULL)
+	{
+		//cout << "enters if statement" << endl;
+		return;
+	}
+	//INORDER TRAVERSAL
+	//write the left node to the file
+	//cout << "after if statement" << endl;
+	serializationNode(node->left, file);
+	//cout << "after serializationNode left" << endl;
+	file << *(node->value) << endl;
+	//cout << "after file input" << endl;
+	//write the right node to the file
+	serializationNode(node->right, file);
+	//cout << "after serializationNode right" << endl;
 }
 
 //a function of type TreeNode
@@ -131,7 +183,7 @@ template <class T, class V>
 void BST<T,V>::insert(T key, V value)
 {
 	//have to check to see if the tree is empty
-	TreeNode<T, V>** node = new TreeNode<T,V>(key, value);
+	TreeNode<T, V>* node = new TreeNode<T,V>(key, value);
 	if (root == NULL)
 	{
 		//tree is empty
@@ -141,10 +193,10 @@ void BST<T,V>::insert(T key, V value)
 	{
 		//tree is not empty, find the insertion location
 		//search the tree to find the point
-		TreeNode<T, V>** current = root; //start the current node at the root
-		TreeNode<T, V>** parent = NULL;
+		TreeNode<T, V>* current = root; //start the current node at the root
+		TreeNode<T, V>* parent = NULL;
 
-		while (true)//can also say current != NULL
+		while (current != NULL)//can also say current != NULL
 		{
 			parent = current;
 			if (key < current->key)
@@ -339,4 +391,3 @@ TreeNode<T,V>* BST<T,V>::getSuccessor(TreeNode<T,V>* d) // d is the node to be d
 
 	return successor;
 }
-

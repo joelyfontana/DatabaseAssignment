@@ -7,28 +7,37 @@ Assignment 5 - Building a Database with BST*/
 #include "FileReader.h"
 using namespace std;
 
+
+const string FileReader::studentFileName = "studentTable.txt";
+const string FileReader::facultyFileName = "facultyTable.txt";
+
 FileReader::FileReader()
 {}
 FileReader::~FileReader()
 {}
 
-
 //open the files that contains the tree, reads the file, and makes an object
 BST<int, Student*>* FileReader::readStudentFile()
 {
 	//check to make sure the file exists
+	int line = 0;
 	ifstream studentFile;
 	studentFile.open(studentFileName);
-	if (!studentFile.is_open())
+	if (studentFile.is_open())
 	{
-		//if the file does not exist make an empty tree for each class (student and faculty)
+		//if the file is open read the student tree
 		BST<int, Student*>* studentTree = new BST<int, Student*>();
+		//put the information from the student file in the tree
+		//use the override operator
+
+
 		return studentTree;
 	}
-	//if the file does exist
+	//if the file does not exist
 	else
 	{
-
+		//initialize master student as a new empty tree
+		return new BST<int, Student*>();
 	}
 }
 
@@ -38,16 +47,20 @@ BST<int, Faculty*>* FileReader::readFacultyFile()
 	//check to make sure the file exists
 	ifstream facultyFile;
 	facultyFile.open(facultyFileName);
-	if (!facultyFile.is_open())
+	if (facultyFile.is_open())
 	{
-		//if the file does not exist make an empty tree for each class (student and faculty)
+		//if the file does exist read the faculty tree
 		BST<int, Faculty*>* facultyTree = new BST<int, Faculty*>();
+
+
+
 		return facultyTree;
 	}
-	//if the file does exist
+	//if the file does not exist
 	else
 	{
-
+		//initialize master faculty as a new empty tree
+		return new BST<int, Faculty*>();
 	}
 }
 
@@ -55,24 +68,21 @@ BST<int, Faculty*>* FileReader::readFacultyFile()
 //write the tree first, and then read it
 // assume we already have the tree
 void FileReader::writeToStudentFile(BST <int, Student*>* studentTree)
-{
-	//create and open the file to write out to
-	ofstream studentFile;
-	studentFile.open(studentFileName);
+{	
+	//cout << "enters write to student" << endl;
 	//write and serialize the student tree
-	studentFile.write((char*)&studentTree, sizeof(studentTree));
-	cout << "student tree: " << studentTree << endl;
-	//close the file you numbnut
-	studentFile.close();
+	//use the printing function in the tree to write to it instead
+	studentTree->serialization(studentFileName);
+	//cout << "studentFileName: "<<studentFileName << endl;
+	//cout << "ST Name: " << studentTree->peek()->value->name << endl;;
+	//cout << "student tree: " << studentTree << endl;
 }
 
 //write to the faculty tree
 void FileReader::writeToFacultyFile(BST <int, Faculty*>* facultyTree)
 {
-	ofstream facultyFile;
-	facultyFile.open(facultyFileName);
 	//write and serialize the faculty tree
-	facultyFile.write((char*)&facultyTree, sizeof(facultyTree));
-	cout << "faculty Tree: " << facultyTree << endl;
-	facultyFile.close();
+	//use the printing function in the tree to write to it instead
+	facultyTree->serialization(facultyFileName);
+	//cout << "faculty Tree: " << facultyTree << endl;
 }

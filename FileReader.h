@@ -21,13 +21,14 @@ public:
 	//destructor
 	~FileReader();
 	//preset the files 
-	string studentFileName = "studentTable.txt";
-	string facultyFileName = "facultyTable.txt";
+	//make them static because the information never changes and consts so they cant be changed (and saves memory)
+	static const string studentFileName;
+	static const string facultyFileName;
 
-	BST<int, Student*>* readStudentFile();
-	BST<int, Faculty*>* readFacultyFile();
+	static BST<int, Student*>* readStudentFile();
+	static BST<int, Faculty*>* readFacultyFile();
 	//Binary search tree called studentTree of int student IDs and of values students as a pointer
-	void writeToStudentFile(BST <int, Student*>* studentTree);
+	static void writeToStudentFile(BST <int, Student*>* studentTree);
 	//Binary search tree called facultyTree of int faculty IDs and of values faculty as a pointer
-	void writeToFacultyFile(BST <int, Faculty*>* facultyTree);
+	static void writeToFacultyFile(BST <int, Faculty*>* facultyTree);
 };
