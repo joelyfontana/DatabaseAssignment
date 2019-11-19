@@ -8,3 +8,7 @@ http://www.cplusplus.com/forum/general/32351/
 
 overloading operators - 
 https://www.geeksforgeeks.org/overloading-stream-insertion-operators-c/
+
+spaces in user input - 
+https://stackoverflow.com/questions/2765462/how-to-cin-space-in-c/2765613
+https://stackoverflow.com/questions/46204672/getlinecin-string-not-giving-expected-output

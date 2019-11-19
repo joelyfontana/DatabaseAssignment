@@ -69,13 +69,9 @@ BST<int, Faculty*>* FileReader::readFacultyFile()
 // assume we already have the tree
 void FileReader::writeToStudentFile(BST <int, Student*>* studentTree)
 {	
-	//cout << "enters write to student" << endl;
 	//write and serialize the student tree
 	//use the printing function in the tree to write to it instead
 	studentTree->serialization(studentFileName);
-	//cout << "studentFileName: "<<studentFileName << endl;
-	//cout << "ST Name: " << studentTree->peek()->value->name << endl;;
-	//cout << "student tree: " << studentTree << endl;
 }
 
 //write to the faculty tree
@@ -84,5 +80,4 @@ void FileReader::writeToFacultyFile(BST <int, Faculty*>* facultyTree)
 	//write and serialize the faculty tree
 	//use the printing function in the tree to write to it instead
 	facultyTree->serialization(facultyFileName);
-	//cout << "faculty Tree: " << facultyTree << endl;
 }

@@ -26,15 +26,15 @@ Student::~Student()
 //overloaded operator functions
 ostream& operator<<(ostream& out, const Student& c)
 {
-	cout << "in operator function" << endl;
-	out << c.ID << endl;
-	cout << "after ID" << endl;
-	out << c.name << endl;
-	out << c.grade << endl;
-	cout << "after grade out" << endl;
-	out << c.major << endl;
-	out << c.GPA << endl;
-	out << c.adID << endl;
+	//cout << "in operator function" << endl;
+	out << "\nID: " << c.ID << endl;
+	//cout << "after ID" << endl;
+	out << "Name: " << c.name << endl;
+	out << "Grade: " << c.grade << endl;
+	//cout << "after grade out" << endl;
+	out << "Major: "<< c.major << endl;
+	out <<"GPA: "<< c.GPA << endl;
+	out <<"Advisor ID: " << c.adID << endl;
 	return out;
 }
 

@@ -4,6 +4,7 @@ Data Structures
 Section 1
 Assignment 5 - Building a Database with BST*/
 
+#pragma once
 #include <iostream>
 #include <fstream>
 #include "BST.h"

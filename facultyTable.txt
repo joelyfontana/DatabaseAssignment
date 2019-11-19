@@ -2,5 +2,4 @@
 kathy
 administrator
 comp sci
-0x561bc0f401e0
 

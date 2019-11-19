@@ -31,7 +31,6 @@ ostream& operator <<(ostream& out, const Faculty& c)
 	out << c.name << endl;
 	out << c.job << endl;
 	out << c.department << endl;
-	out << c.studentIDs << endl;
 	return out;
 }
 

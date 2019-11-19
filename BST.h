@@ -25,8 +25,13 @@ public:
 	//constructor and destructor
 	BST();
 	~BST();
+	int insertRun = 0;
 
-	bool search(V value);//value is the key
+	//return key
+	T searchWithValue(V value);
+	//return value
+	V searchWithKey(T key);
+
 	void insert(T key, V value);
 	//add delete function here!
 	bool deleteNode(T key);
@@ -43,7 +48,27 @@ public:
 	
 	// a recursive function that allows subtree to print not just the whole tree
 	void recPrint(TreeNode<T,V>* node);
+
+	//create a variable to see how many nodes are even in the tree
+	unsigned int numberNodes =0;
 };
+
+
+//exceptions 
+class nodeDNEexception : public runtime_error
+{
+public:
+	nodeDNEexception(string message) :runtime_error(message.c_str())
+	{}
+};
+
+class treeEmptyException : public runtime_error
+{
+public:
+	treeEmptyException(string message) :runtime_error(message.c_str())
+	{}
+};
+
 
 //constrcutor
 template <class T, class V>
@@ -84,13 +109,15 @@ TreeNode<T,V>* BST<T, V>::peek()
 template <class T, class V>
 void BST<T,V>::recPrint(TreeNode<T,V>* node)
 {
+	//make sure the tree is not empty
 	if (node == NULL)
 	{
 		return;
 	}
-
+	//if tree is not empty
 	recPrint(node->left);
-	cout << "key: " << node->key <<"\tvalue: " <<node->value<< endl;
+	//dereference the node->value!!
+	cout << "key: " << node->key <<"\tvalue: " <<*(node->value)<< endl;
 	recPrint(node->right);
 }
 
@@ -98,6 +125,10 @@ void BST<T,V>::recPrint(TreeNode<T,V>* node)
 template <class T, class V>
 void BST<T,V>::printTree()
 {
+	if (root == NULL)
+	{
+		throw treeEmptyException("The tree is empty");
+	}
 	recPrint(root);
 }
 
@@ -110,10 +141,10 @@ void BST<T, V>::serialization(string newFileName)
 	file.open(newFileName);
 	//cout << "after open file" << endl;
 	serializationNode(root, file);
-	cout << "file: " << newFileName << endl;
+	//cout << "file: " << newFileName << endl;
 	//cout << "after serialization" << endl;
 	file.close();
-	cout << "File is closed" << endl;
+	//cout << "File is closed" << endl;
 }
 
 template <class T, class V>
@@ -178,16 +209,21 @@ TreeNode<T,V>* BST<T,V>::getMin()
 	return (current);
 }
 
+
 //insert is just a failed search??
 template <class T, class V>
 void BST<T,V>::insert(T key, V value)
 {
+	insertRun++;
+	
 	//have to check to see if the tree is empty
 	TreeNode<T, V>* node = new TreeNode<T,V>(key, value);
 	if (root == NULL)
 	{
 		//tree is empty
 		root = node;
+		numberNodes++;
+		//cout << "number of nodes1: " << numberNodes << endl;
 	}
 	else
 	{
@@ -202,10 +238,12 @@ void BST<T,V>::insert(T key, V value)
 			if (key < current->key)
 			{
 				current = current->left;
-				if (current = NULL)
+				if (current == NULL)
 				{
 					//we found the insertion point - update the parent
 					parent->left = node;
+					numberNodes++;
+					//cout << "number of nodes2: " << numberNodes << endl;
 					break;
 				}
 				//going left
@@ -214,28 +252,31 @@ void BST<T,V>::insert(T key, V value)
 			{
 				//go right
 				current = current->right;
-				if (current = NULL)
+				if (current == NULL)
 				{
 					//we found the insertion point - update the parent
 					parent->right = node;
+					numberNodes++;
+					//cout << "number of nodes3: " << numberNodes << endl;
 					break;
 				}
 			}
 		}
 	}
+	//cout << "insert run: " << insertRun << endl;
 }
 
 template <class T, class V>
-bool BST<T,V>::search(V value)
+T BST<T,V>::searchWithValue(V value)
 {
 	if (root == NULL) //empty tree
 	{
-		return false;
+		throw runtime_error("Tree is empty");
 	}
 	else
 	{
 		//tree is not empty - look for the student passed in in the student tree
-		TreeNode<T, V>** current = root;
+		TreeNode<T, V>* current = root;
 		while (current->value != value)
 		{
 			if (value < current->value)
@@ -249,10 +290,41 @@ bool BST<T,V>::search(V value)
 			if (current == NULL)
 			{
 				//did not find the value
-				return false;
+				throw runtime_error("value could not be found");
 			}
 		}
-		return true;
+		return current->key;
+	}
+}
+
+template <class T, class V>
+V BST<T, V>::searchWithKey(T key)
+{
+	if (root == NULL) //empty tree
+	{
+		throw runtime_error("tree is empty");
+	}
+	else
+	{
+		//tree is not empty - look for the student passed in in the student tree
+		TreeNode<T, V>* current = root;
+		while (current->key != key)
+		{
+			if (key < current->key)
+			{
+				current = current->left;
+			}
+			else
+			{
+				current = current->right;
+			}
+			if (current == NULL)
+			{
+				//did not find the value
+				throw runtime_error("key could not be found");
+			}
+		}
+		return current->value;
 	}
 }
 
@@ -370,9 +442,9 @@ TreeNode<T,V>* BST<T,V>::getSuccessor(TreeNode<T,V>* d) // d is the node to be d
 {
 	//sp = successor parent
 	TreeNode<T, V>* sp = d; //node to be deleted
-	TreeNode<T, V>** successor = d;
+	TreeNode<T, V>* successor = d;
 	//start one right
-	TreeNode<T, V>** current = d->right;
+	TreeNode<T, V>* current = d->right;
 
 	//one right and all the way left
 	while (current != NULL)
@@ -391,3 +463,4 @@ TreeNode<T,V>* BST<T,V>::getSuccessor(TreeNode<T,V>* d) // d is the node to be d
 
 	return successor;
 }
+
