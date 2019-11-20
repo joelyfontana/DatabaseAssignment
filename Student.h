@@ -16,7 +16,7 @@ public:
 	~Student();
 	//overloading the operators << and >>
 	friend ostream& operator << (ostream& out, const Student& c);
-	//friend ostream& operator >> (ostream& out, const Student& c);
+	friend istream& operator >> (istream& out, const Student& c);
 	int ID;
 	string name;
 	string grade;

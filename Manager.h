@@ -31,10 +31,14 @@ public:
 	void addFaculty(Faculty* newFaculty);
 	void deleteStudent(int ID);
 	void deleteFaculty(int ID);
+	Faculty* findFacultyWithStudentID(int ID);
+	void changeStudentAdvisor(int sID, int fID);
+	void printFacultyAdvisees(int fID);
+	void removeAdviseeFromFaculty(int sID, int fID);
 
 
 	// make a function that assigns the student to the correct faculty
-	void assignAdvisor(Student student, Faculty faculty);
+	void assignAdvisor(int sID, int fID);
 };
 
 //make the class expections

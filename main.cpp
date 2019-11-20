@@ -17,21 +17,24 @@ int main(int argc, char** argv)
 
 	int choice;
 	cout << "\nWelcome to the Records Database." << endl;
+	/*manager->addFaculty(new Faculty(7654321, "Kendra Day", "professor", "comp sci"));
+	manager->addFaculty(new Faculty(1234567, "stephen white", "loser", "comp sci"));
+	manager->addStudent(new Student(2313535, "joely fontana", "sophomore", "history", 3.2, 7654321));*/
 
 	while(choice != 14)
 	{
-		cout << "\n1. Print all student\'s and their information (sorted by ascending id #)" << endl;
-		cout << "2. Print all faculty and their information (sorted by ascending id #)" << endl;
-		cout << "3. Find and display student information given the students id " << endl;
-		cout << "4. Find and display faculty information given the faculty id" << endl;
-		cout << "5. Given a students id, print the name and info of their faculty advisor" << endl;
-		cout << "6. Given a faculty id, print ALL the names and info of his/her advisees." << endl;
+		cout << "\n1. Print all student\'s and their information (sorted by ascending ID #)" << endl;
+		cout << "2. Print all faculty and their information (sorted by ascending ID #)" << endl;
+		cout << "3. Find and display student information given the students ID " << endl;
+		cout << "4. Find and display faculty information given the faculty ID" << endl;
+		cout << "5. Given a students ID, print the name and info of their faculty advisor" << endl;
+		cout << "6. Given a faculty ID, print ALL the names and info of his/her advisees" << endl;
 		cout << "7. Add a new student " << endl;
-		cout << "8. Delete a student given the id " << endl;
+		cout << "8. Delete a student given the ID " << endl;
 		cout << "9. Add a new faculty member" << endl;
-		cout << "10. Delete a faculty member given the id." << endl;
-		cout << "11. Change a student\'s advisor given the student id and the new faculty id." << endl;
-		cout << "12. Remove an advisee from a faculty member given the ids" << endl;
+		cout << "10. Delete a faculty member given the ID" << endl;
+		cout << "11. Change a student\'s advisor given the student ID and the new faculty ID" << endl;
+		cout << "12. Remove an advisee from a faculty member given the IDs" << endl;
 		cout << "13. Rollback" << endl;
 		cout << "14. Exit */" << endl;
 		cout << "\nPlease enter the number of the option you want to perform: ";
@@ -91,7 +94,23 @@ int main(int argc, char** argv)
 			}
 		}
 
-		//MAKE 5 AND 6 HERE
+		//Given a students id, print the name and info of their faculty advisor
+		if (choice == 5)
+		{
+			int wantedID;
+			cout << "Please enter the ID of the student whose faculty's advisor's information you want to print: ";
+			cin >> wantedID;
+			Faculty* facultyInfo = manager->findFacultyWithStudentID(wantedID);
+			cout << *facultyInfo<< endl;
+		}
+
+		//Given a faculty ID, print ALL the names and info of his/her advisees
+		if (choice == 6)
+		{
+			int fID;
+			cout << "Please enter the faculty ID whose advisees you want to print: ";
+			cin >> fID;
+		}
 
 		if (choice == 7)
 		{
@@ -163,6 +182,30 @@ int main(int argc, char** argv)
 			cout << "Enter the ID of the faculty you wish to delete: ";
 			cin >> deleteID;
 			manager->deleteFaculty(deleteID);
+			//NEED TO MOVE STUDENTS OF DELETED FACULTY MEMBER TO OTHER ADVISORS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		}
+
+		//Change a student's advisor given the student ID and the new faculty ID
+		if (choice == 11)
+		{
+			int studentID;
+			int facultyID;
+			cout << "Please enter the ID of the student: ";
+			cin >> studentID;
+			cout << "Please enter the ID of the new faculty: ";
+			cin >> facultyID;
+			manager->changeStudentAdvisor(studentID, facultyID);
+		}
+
+		//Remove an advisee from a faculty member given the IDs
+		if (choice == 12)
+		{
+			int studentID;
+			int facultyID;
+			cout << "Please enter the ID of the student who want to remove: ";
+			cin >> studentID;
+			cout << "Please enter the ID of the faculty who wish to remove the student from: ";
+			cin >> facultyID;
 		}
 	}	
 }

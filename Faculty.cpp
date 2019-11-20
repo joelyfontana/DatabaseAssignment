@@ -15,7 +15,7 @@ Faculty::Faculty(int ID, string name, string job, string department)
 	this->name = name;
 	this->job = job;
 	this->department = department;
-	this->studentIDs = studentIDs;
+	//this->studentIDs = studentIDs;
 	//make an empty list of student IDs
 	studentIDs = new DoublyLinkedList<int>();
 }
@@ -31,7 +31,26 @@ ostream& operator <<(ostream& out, const Faculty& c)
 	out << c.name << endl;
 	out << c.job << endl;
 	out << c.department << endl;
+	out << *(c.studentIDs) << endl;
 	return out;
 }
+
+//add students to the faculty list
+void Faculty::addStudent(int ID)
+{
+	studentIDs->insertFront(ID);
+}
+
+//remove students from the faculty list
+void Faculty::removeStudent(int ID)
+{
+	studentIDs->remove(ID);
+}
+
+////make a function that inputs all of a faculty's advisees into their list
+//void Faculty::addAdvisees(int ID)
+//{
+//	studentIDs->insertFront(ID);
+//}
 
 

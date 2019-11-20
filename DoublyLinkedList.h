@@ -30,6 +30,7 @@ public:
 
 	void insertFront(T d);
 	void insertBack(T d);
+	ListNode<T>* remove(T d);
 	T removeFront();
 	T removeBack();
 	T deletePos(int position);
@@ -38,6 +39,15 @@ public:
 	bool isEmpty();
 	void printList();
 	unsigned int getSize();
+	template <class U>
+	friend ostream& operator <<(ostream& out, const DoublyLinkedList<U>& c);
+};
+
+//exceptions 
+class ListEmptyException : public runtime_error
+{
+public: 
+	ListEmptyException(string message) : runtime_error(message.c_str()) {}
 };
 
 //doubly linked list implementation
@@ -93,6 +103,51 @@ void DoublyLinkedList<T>::insertFront(T d)
 	size++;
 }
 
+//remove function
+template <class T>
+ListNode<T>* DoublyLinkedList<T>::remove(T d)
+{
+	if (isEmpty())
+	{
+		throw ListEmptyException("The list is empty");
+	}
+
+	ListNode<T>* current = front;
+
+	while (current->data != d)
+	{
+		current = current->next;
+
+		if (current == NULL)
+		{
+			return NULL;
+		}
+	}
+
+	//if we found the node
+	if (current == front)
+	{
+		front = current->next;
+	}
+	else if (current == back)
+	{
+		current->prev->next = current->next;
+		back = current->prev;
+	}
+	else
+	{
+		current->prev->next = current->next;
+		current->next->prev = current->prev;
+	}
+
+	current->next = NULL;
+	current->prev = NULL;
+
+	size--;
+
+	return current;
+}
+
 //remove front function
 template <class T>
 T DoublyLinkedList<T>::removeFront()
@@ -104,7 +159,6 @@ T DoublyLinkedList<T>::removeFront()
 	}
 
 	ListNode<T>* frontTemp = front;
-	//check to see if the list is empty before removing
 	if (size == 1)
 	{
 		back = NULL;
@@ -249,4 +303,17 @@ bool DoublyLinkedList<T>::isEmpty()
 	{
 		return false;
 	}
+}
+
+template <class T>
+//overloaded operator functions
+ostream& operator <<(ostream& out, const DoublyLinkedList<T>& c)
+{
+	ListNode<T>* current = c.front;
+	while (current != NULL)
+	{
+		out << current->data << endl;
+		current = current->next;
+	}
+	return out;
 }
