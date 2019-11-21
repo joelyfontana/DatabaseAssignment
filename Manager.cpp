@@ -66,6 +66,8 @@ Faculty* Manager::findFacultyWithID(int ID)
 void Manager::addStudent(Student* newStudent)
 {
 	masterStudent->insert(newStudent->ID, newStudent);
+	Faculty* faculty = masterFaculty->searchWithKey(newStudent->adID);
+	faculty->addStudent(newStudent->ID); 
 }
 
 void Manager::addFaculty(Faculty* newFaculty)
@@ -80,6 +82,9 @@ void Manager::deleteStudent(int ID)
 
 void Manager::deleteFaculty(int ID)
 {
+	//get all of the students belonging to that faculty 
+	Faculty* faculty = masterFaculty->searchWithKey(ID);
+	faculty->studentIDs;
 	masterFaculty->deleteNode(ID);
 }
 

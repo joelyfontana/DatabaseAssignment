@@ -17,9 +17,9 @@ int main(int argc, char** argv)
 
 	int choice;
 	cout << "\nWelcome to the Records Database." << endl;
-	/*manager->addFaculty(new Faculty(7654321, "Kendra Day", "professor", "comp sci"));
+	manager->addFaculty(new Faculty(7654321, "Kendra Day", "professor", "comp sci"));
 	manager->addFaculty(new Faculty(1234567, "stephen white", "loser", "comp sci"));
-	manager->addStudent(new Student(2313535, "joely fontana", "sophomore", "history", 3.2, 7654321));*/
+	manager->addStudent(new Student(2313535, "joely fontana", "sophomore", "history", 3.2, 7654321));
 
 	while(choice != 14)
 	{
@@ -182,7 +182,7 @@ int main(int argc, char** argv)
 			cout << "Enter the ID of the faculty you wish to delete: ";
 			cin >> deleteID;
 			manager->deleteFaculty(deleteID);
-			//NEED TO MOVE STUDENTS OF DELETED FACULTY MEMBER TO OTHER ADVISORS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			//NEED TO MOVE STUDENTS OF DELETED FACULTY MEMBER TO OTHER ADVISORS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		}
 
 		//Change a student's advisor given the student ID and the new faculty ID
@@ -206,6 +206,12 @@ int main(int argc, char** argv)
 			cin >> studentID;
 			cout << "Please enter the ID of the faculty who wish to remove the student from: ";
 			cin >> facultyID;
+		}
+
+		//rollback command
+		if(choice ==13)
+		{
+
 		}
 	}	
 }
