@@ -15,17 +15,17 @@ int main(int argc, char** argv)
 {
 	Manager* manager = new Manager();
 
-	////make the faculty
-	//Faculty* faculty = new Faculty(11111, "kathy", "administrator", "comp sci");
+	//////make the faculty
+	//Faculty* faculty = new Faculty(7654321, "kathy", "administrator", "comp sci");
 	////insert the faculty into a tree
 	//manager->addFaculty(faculty);
 
-	////make the student
-	//Student* student = new Student(2313535, "joely fontana", "sophomore", "history", 3.2, 11111);
+	//////make the student
+	//Student* student = new Student(2313535, "joely fontana", "sophomore", "history", 3.2, 7654321);
 	////insert the student into the tree
 	//manager->addStudent(student);
 
-	//Student* student2 = new Student(2302555, "stephen white", "freshman", "comp sci", 3.7, 11111);
+	//Student* student2 = new Student(2302555, "stephen white", "freshman", "comp sci", 3.7, 7654321);
 	////insert the student into the tree
 	//manager->addStudent(student2);
 

@@ -11,7 +11,7 @@ using namespace std;
 //constructor
 Manager::Manager()
 {
-	masterStudent = new BST<int, Student*> (); //FileReader::readStudentFile();
+	masterStudent = new BST<int, Student*>(); //FileReader::readStudentFile();
 	masterFaculty = new BST<int, Faculty*> ();//FileReader::readFacultyFile();	
 }
 Manager::~Manager()
@@ -68,7 +68,14 @@ void Manager::addStudent(Student* newStudent)
 {
 	masterStudent->insert(newStudent->ID, newStudent);
 	Faculty* faculty = masterFaculty->searchWithKey(newStudent->adID);
-	faculty->addStudent(newStudent->ID); 
+	try
+	{
+		faculty->addStudent(newStudent->ID);
+	}
+	catch (FacultyDNEexception e)
+	{
+		cout << e.what() << endl;
+	}
 }
 
 void Manager::addFaculty(Faculty* newFaculty)

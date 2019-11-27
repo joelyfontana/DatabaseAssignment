@@ -1,12 +1,7 @@
-ID: 1234567
-Name: stephen white
-Job: loser
-Department: comp sci
-
-
 ID: 7654321
-Name: Kendra Day
+Name: kendra day
 Job: professor
-Department: comp sci
+Department: ethics
+2313535
 
 

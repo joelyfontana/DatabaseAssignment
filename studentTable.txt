@@ -1,0 +1,8 @@
+
+ID: 2313535
+Name: joely fontana
+Grade: sophomore
+Major: comp sci
+GPA: 3.4
+Advisor ID: 7654321
+
