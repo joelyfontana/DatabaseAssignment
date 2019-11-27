@@ -11,12 +11,13 @@ using namespace std;
 //constructor
 Manager::Manager()
 {
-	masterStudent = FileReader::readStudentFile();
-	masterFaculty = FileReader::readFacultyFile();
+	masterStudent = new BST<int, Student*> (); //FileReader::readStudentFile();
+	masterFaculty = new BST<int, Faculty*> ();//FileReader::readFacultyFile();	
 }
 Manager::~Manager()
 {
-
+	FileReader::writeToStudentFile(masterStudent);
+	FileReader::writeToFacultyFile(masterFaculty);
 }
 
 void Manager::assignAdvisor(int sID, int fID)

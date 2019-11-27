@@ -141,8 +141,6 @@ void BST<T, V>::serialization(string newFileName)
 	file.open(newFileName);
 	//cout << "after open file" << endl;
 	serializationNode(root, file);
-	//cout << "file: " << newFileName << endl;
-	//cout << "after serialization" << endl;
 	file.close();
 	//cout << "File is closed" << endl;
 }
@@ -158,7 +156,6 @@ void BST<T, V>::serializationNode(TreeNode<T,V>* node, ofstream& file)
 	}
 	//INORDER TRAVERSAL
 	//write the left node to the file
-	//cout << "after if statement" << endl;
 	serializationNode(node->left, file);
 	//cout << "after serializationNode left" << endl;
 	file << *(node->value) << endl;

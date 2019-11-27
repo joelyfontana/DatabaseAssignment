@@ -27,10 +27,10 @@ Faculty::~Faculty()
 //overloaded operator functions
 ostream& operator <<(ostream& out, const Faculty& c)
 {
-	out << c.ID << endl;
-	out << c.name << endl;
-	out << c.job << endl;
-	out << c.department << endl;
+	out << "ID: "<<c.ID << endl;
+	out << "Name: "<<c.name << endl;
+	out << "Job: " <<c.job << endl;
+	out << "Department: " << c.department << endl;
 	out << *(c.studentIDs) << endl;
 	return out;
 }

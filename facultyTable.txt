@@ -1,5 +1,12 @@
-11111
-kathy
-administrator
-comp sci
+ID: 1234567
+Name: stephen white
+Job: loser
+Department: comp sci
+
+
+ID: 7654321
+Name: Kendra Day
+Job: professor
+Department: comp sci
+
 
