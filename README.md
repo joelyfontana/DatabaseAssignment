@@ -2,7 +2,7 @@
 a. Full Name: Joely Fontana
 b. Student ID: 2313535
 c. Chapman Email: fontana@chapman.edu
-d. Course Number and Section: 353 - 1
+d. Course Number and Section: 350 - 1
 e. Assignment or Excercise Number: Assignment #5 - Building a Database with a BST
 
 2. A LIST OF ALL SOURCE FILED SUBMITTED FOR THIS ASSIGNMENT
